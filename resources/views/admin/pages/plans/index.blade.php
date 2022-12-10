@@ -3,7 +3,18 @@
 @section('title', 'Planos')
 
 @section('content_header')
-    <h1>Planos <a href=" {{ route('plans.create') }} " class="btn btn-dark">ADD</a> </h1>
+
+
+        <nav class="mb-1" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href=" {{route('admin.index')}} ">Dashboard</a></li>
+            <li class="breadcrumb-item "><a class="active" href=" {{route('plans.index')}} " >Planos</a></li>
+        </ol>
+      </nav>
+
+    <h1>Planos <a href=" {{ route('plans.create') }} " class="btn btn-dark">ADD <i class="fa-solid fa-plus"></i></a>   </h1>
+
+
 @stop
 
 @section('content')
@@ -12,10 +23,10 @@
             <form action=" {{ route('plans.search') }} " method="post" class="form form-inline">
                     @csrf
                     <div class="form-group mr-1">
-                        <input type="text" name="filter" placeholder="Nome" class="form-control">
+                        <input type="text" name="filter" placeholder="Nome" value="{{ $filters['filter'] ?? '' }}" class="form-control">
                     </div>
                 
-                    <button type="submit" class="btn btn-dark">Filtrar</button>
+                    <button type="submit" class="btn btn-dark">Filtrar <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
         <div class="card-body">
@@ -25,7 +36,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Preço</th>
-                            <th style="width: 50px;">Ações</th>
+                            <th style="width: 150px;">Ações</th>
                         </tr>
                     </thead>
 
@@ -39,6 +50,7 @@
                                 R$ {{ number_format($plan->price, 2, ',', '.') }}
                             </td>
                             <td>
+                                <a href=" {{route('plans.edit', $plan->url )}} " class="btn btn-info">Edit</a>
                                 <a href=" {{ route('plans.show', $plan->url) }} " class="btn btn-warning">Ver</a>
                             </td>
                         </tr>
@@ -76,6 +88,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"  />
 @stop
 
 @section('js')

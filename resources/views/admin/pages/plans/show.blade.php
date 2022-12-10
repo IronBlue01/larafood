@@ -28,11 +28,11 @@
                     </li>
                 </ul>
 
-                <form action="{{ route('plans.delete', $plan->url) }}" method="post" >
+                <form action="{{ route('plans.destroy', $plan->url) }}" method="post" >
                     @csrf
                     @method('DELETE')
                   
-                    <button type="submit" class="btn btn-danger"> DELETAR O PLANO </button>
+                    <button type="submit" class="btn btn-danger"> DELETAR O PLANO  <i class="ml-1 fa-solid fa-trash"></i> </button>
 
                 </form>
         </div>
@@ -43,6 +43,7 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"  />
 @stop
 
 @section('js')

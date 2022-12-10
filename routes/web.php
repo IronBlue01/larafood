@@ -1,13 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\{
+    PlanController
+};
 
-Route::any('admin/plans/search', [App\Http\Controllers\PlanController::class, 'search'])->name('plans.search');
-Route::get('admin/plans/{url}', [App\Http\Controllers\PlanController::class, 'show'])->name('plans.show');
-Route::post('admin/plans', [App\Http\Controllers\PlanController::class, 'store'])->name('plans.store');
-Route::get('admin/plans', [App\Http\Controllers\PlanController::class, 'index'])->name('plans.index');
-Route::get('admin/create', [App\Http\Controllers\PlanController::class, 'create'])->name('plans.create');
-Route::delete('admin/plans/{url}', [App\Http\Controllers\PlanController::class, 'destroy'])->name('plans.delete');
+Route::prefix('admin')
+    ->group(function () {
+    Route::any('plans/search', [PlanController::class, 'search'])->name('plans.search');
+    Route::resource('plans','App\Http\Controllers\Admin\PlanController');
+    Route::get('create', [PlanController::class, 'create'])->name('plans.create');
+    Route::get('/', [PlanController::class, 'index'])->name('admin.index');
+});
+
+
 
 
 Route::get('/', function () {

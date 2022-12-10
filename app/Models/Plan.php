@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Plan extends Model
 {
@@ -21,6 +22,11 @@ class Plan extends Model
                         ->paginate(1);
 
         return $results;
+    }
+
+    public function details(): HasMany
+    {
+        return $this->hasMany(DetailPlan::class);
     }
 
 }
