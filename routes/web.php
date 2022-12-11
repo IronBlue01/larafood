@@ -3,16 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     PlanController,
-    DetailPlanController
+    DetailPlanController,
+    ACL\ProfileController
 };
 
 Route::prefix('admin')
     ->group(function () {
 
-        
     /**
     * Routes Profiles
     */
+    Route::any('search', [ProfileController::class, 'search'])->name('profiles.search');
     Route::resource('profiles', 'App\Http\Controllers\Admin\ACL\ProfileController');
 
     /**
@@ -38,9 +39,6 @@ Route::prefix('admin')
      */
     Route::get('/', [PlanController::class, 'index'])->name('admin.index');
 });
-
-
-
 
 Route::get('/', function () {
     return view('welcome');

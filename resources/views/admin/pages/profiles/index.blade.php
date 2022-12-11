@@ -17,7 +17,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action=" {{ route('plans.search') }} " method="post" class="form form-inline">
+            <form action=" {{ route('profiles.search') }} " method="post" class="form form-inline">
                     @csrf
                     <div class="form-group mr-1">
                         <input type="text" name="filter" placeholder="Nome" value="{{ $filters['filter'] ?? '' }}" class="form-control">
