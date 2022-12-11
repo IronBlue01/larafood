@@ -314,12 +314,12 @@ return [
         [
             'text'        => 'Planos',
             'url'         => 'admin/plans',
-            'icon'        => 'far fa-fw fa-ul',
+            'icon'        => 'far fa-fw fa-file',
         ],
         [
-            'text'        => 'Criar Planos',
-            'url'         => 'admin/plans/create',
-            'icon'        => 'far fa-fw fa-file',
+            'text'        => 'Perfis',
+            'url'         => 'admin/profiles',
+            'icon'        => 'far fa-fw fa-user',
         ]
     ],
 

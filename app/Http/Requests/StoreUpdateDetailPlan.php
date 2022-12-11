@@ -1,10 +1,10 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class {{ class }} extends FormRequest
+class StoreUpdateDetailPlan extends FormRequest
 {
     public function authorize()
     {
@@ -14,7 +14,7 @@ class {{ class }} extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' =>  ['required', 'min:3', 'max:255', ]
         ];
     }
 }

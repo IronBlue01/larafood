@@ -48,18 +48,6 @@ class PlanController extends Controller
             ]);
     }
 
-    public function destroy($url)
-    {
-        $plan = $this->repository->where('url', $url)->first();
-
-        if(!$plan)
-            redirect()->back();
-
-        $plan->delete();
-
-        return redirect()->route('plans.index');
-    }
-
     public function search(Request $request)
     {
         $filters = $request->except('_token');
@@ -93,4 +81,26 @@ class PlanController extends Controller
 
         return redirect()->route('plans.index');
     }
+
+    public function destroy($url)
+    {
+        $plan = $this->repository
+                ->with('details')
+                ->where('url', $url)
+                ->first();
+
+        if(!$plan)
+            redirect()->back();
+
+            if($plan->details->count()){
+                return redirect()
+                        ->back()
+                        ->with('error', 'Existem detalhes vinculados a esse plano, portanto não pode deletar' );
+            }
+            
+        $plan->delete();
+
+        return redirect()->route('plans.index');
+    }
+
 }

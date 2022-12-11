@@ -1,20 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', 'Perfis')
 
 @section('content_header')
-
 
      <nav class="mb-1" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href=" {{route('admin.index')}} ">Dashboard</a></li>
-            <li class="breadcrumb-item "><a class="active" href=" {{route('plans.index')}} " >Planos</a></li>
+            <li class="breadcrumb-item "><a class="active" href=" {{route('profiles.index')}} " >Perfis</a></li>
         </ol>
       </nav>
 
-    <h1>Planos <a href=" {{ route('plans.create') }} " class="btn btn-dark">ADD <i class="fa-solid fa-plus"></i></a>   </h1>
-
-
+    <h1>Perfis <a href=" {{ route('profiles.create') }} " class="btn btn-dark">ADD <i class="fa-solid fa-plus"></i></a> </h1>
 @stop
 
 @section('content')
@@ -34,24 +31,21 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Preço</th>
                             <th style="width: 220px;">Ações</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                @foreach ($plans as $plan)
+                @foreach ($profiles as $profile)
                         <tr>
                             <td>
-                                {{$plan->name}}
+                                {{$profile->name}}
                             </td>
+                    
                             <td>
-                                R$ {{ number_format($plan->price, 2, ',', '.') }}
-                            </td>
-                            <td>
-                                <a href=" {{route('details.plan.index', $plan->url )}} " class="btn btn-dark">Detail</a>
-                                <a href=" {{route('plans.edit', $plan->url )}} " class="btn btn-info">Edit</a>
-                                <a href=" {{ route('plans.show', $plan->url) }} " class="btn btn-warning">Ver</a>
+                                {{-- <a href=" {{route('details.profile.index', $profile->url )}} " class="btn btn-dark">Detail</a> --}}
+                                <a href=" {{route('profiles.edit', $profile->id )}} " class="btn btn-info">Edit</a>
+                                <a href=" {{ route('profiles.show', $profile->id) }} " class="btn btn-warning">Ver</a>
                             </td>
                         </tr>
                 @endforeach
@@ -63,21 +57,21 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
             @if (isset($filters))
-                    <li class="page-item"><a class="page-link" href=" {{ $plans->appends($filters)->previousPageUrl()}} ">Voltar</a></li>
-                        @for ($i = 1; $i <= $plans->lastPage(); $i++)
-                            <li class="page-item {{ $plans->currentPage() == $i ? 'active' : '' }} ">
-                                    <a class="page-link" href=" {{ $plans->url($i) }} "> {{$i}} </a>
+                    <li class="page-item"><a class="page-link" href=" {{ $profiles->appends($filters)->previousPageUrl()}} ">Voltar</a></li>
+                        @for ($i = 1; $i <= $profiles->lastPage(); $i++)
+                            <li class="page-item {{ $profiles->currentPage() == $i ? 'active' : '' }} ">
+                                    <a class="page-link" href=" {{ $profiles->url($i) }} "> {{$i}} </a>
                             </li>
                         @endfor
-                    <li class="page-item"><a class="page-link" href=" {{ $plans->appends($filters)->nextPageUrl()}} ">Avançar</a></li>
+                    <li class="page-item"><a class="page-link" href=" {{ $profiles->appends($filters)->nextPageUrl()}} ">Avançar</a></li>
             @else
-                    <li class="page-item"><a class="page-link" href=" {{ $plans->previousPageUrl()}} ">Voltar</a></li>
-                            @for ($i = 1; $i <= $plans->lastPage(); $i++)
-                                <li class="page-item {{ $plans->currentPage() == $i ? 'active' : '' }} ">
-                                        <a class="page-link" href=" {{ $plans->url($i) }} "> {{$i}} </a>
+                    <li class="page-item"><a class="page-link" href=" {{ $profiles->previousPageUrl()}} ">Voltar</a></li>
+                            @for ($i = 1; $i <= $profiles->lastPage(); $i++)
+                                <li class="page-item {{ $profiles->currentPage() == $i ? 'active' : '' }} ">
+                                        <a class="page-link" href=" {{ $profiles->url($i) }} "> {{$i}} </a>
                                 </li>
                             @endfor
-                    <li class="page-item"><a class="page-link" href=" {{ $plans->nextPageUrl()}} ">Avançar</a></li>
+                    <li class="page-item"><a class="page-link" href=" {{ $profiles->nextPageUrl()}} ">Avançar</a></li>
              @endif
 
             </ul>
